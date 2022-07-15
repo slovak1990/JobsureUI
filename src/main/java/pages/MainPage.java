@@ -5,14 +5,12 @@ import io.qameta.allure.Step;
 import org.openqa.selenium.support.FindBy;
 import com.codeborne.selenide.SelenideElement;
 import org.openqa.selenium.support.How;
-import static com.codeborne.selenide.Selenide.$$x;
-import static com.codeborne.selenide.Selenide.page;
+import static com.codeborne.selenide.Selenide.*;
 
 public class MainPage {
 
     public static final String MAIN_PAGE_URL = "https://jobsure.ru/";
     private final ElementsCollection reviews = $$x("//*[contains (text(), 'Буквально через 3 дня прилетел хороший оффер')]");
-
 
     // добавить элементы на последние статьи ???
 
@@ -26,7 +24,7 @@ public class MainPage {
     private SelenideElement logoLowerImage;
 
     // кнопка Фейсбук верхняя
-    @FindBy(how = How.XPATH, using = "//*[@class='fa fa-facebook']")
+    @FindBy(how = How.XPATH, using = "//*[@id='topbar']/div/div[1]/span/a[1]/i")
     private SelenideElement facebookUpperButton;
 
     // кнопка Фейсбук нижняя
@@ -265,24 +263,30 @@ public class MainPage {
         logoLowerImage.click();
     }
 
-    @Step("Click header facebook logo")
+    @Step("Click header facebook logo and switch to new window")
     public void clickFacebookUpperButton() {
         facebookUpperButton.click();
+        switchTo().window(1);
     }
 
-    @Step("Click footer facebook logo")
+    @Step("Scroll, click footer facebook logo and switch to new window")
     public void clickFacebookLowerButton() {
+        facebookLowerButton.scrollTo();
         facebookLowerButton.click();
+        switchTo().window(1);
     }
 
-    @Step("Click header instagram logo")
+    @Step("Click header instagram logo and switch to new window")
     public void clickInstagramUpperButton() {
         instagramUpperButton.click();
+        switchTo().window(1);
     }
 
-    @Step("Click footer instagram logo")
+    @Step("Scroll, click footer instagram logo and switch to new window")
     public void clickInstagramLowerButton() {
+        instagramLowerButton.scrollTo();
         instagramLowerButton.click();
+        switchTo().window(1);
     }
 
     @Step("Click privacy policy button")
@@ -340,9 +344,8 @@ public class MainPage {
     }
 
     @Step("Click main button")
-    public MainPage clickMainButton() {
+    public void clickMainButton() {
         mainButton.click();
-        return this;
     }
 
     @Step("Click resume button")
@@ -417,8 +420,9 @@ public class MainPage {
         return this;
     }
 
-    @Step("Click scroll up button")
+    @Step("Scroll to footer and click scroll up button")
     public MainPage clickScrollUpButton() {
+        footerEmailField.scrollTo();
         scrollUpButton.click();
         return this;
     }
@@ -456,7 +460,7 @@ public class MainPage {
         return footerMenuImage.isDisplayed();
     }
 
-    @Step("Set value in footer email field")
+    @Step("Scroll and set value in footer email field")
     public MainPage setFooterEmailField(String email) {
         footerEmailField.scrollTo();
         footerEmailField.setValue(email);
