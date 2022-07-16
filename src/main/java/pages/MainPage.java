@@ -39,6 +39,10 @@ public class MainPage {
     @FindBy(how = How.XPATH, using = "//*[@class='fa fa-instagram fa-lg']")
     private SelenideElement instagramLowerButton;
 
+    // кнопка Live Internet
+    @FindBy(how = How.XPATH, using = "//*[@id='licnt3187']")
+    private SelenideElement lifeInternetButton;
+
     // кнопка Политика конфидециальности
     @FindBy(how = How.XPATH, using = "//*[contains (text(), 'Политика конфиденциальности')]")
     private SelenideElement privacyPolicyButton;
@@ -286,6 +290,12 @@ public class MainPage {
     public void clickInstagramLowerButton() {
         instagramLowerButton.scrollTo();
         instagramLowerButton.click();
+        switchTo().window(1);
+    }
+
+    @Step("Click life internet button and switch to new window")
+    public void clickLifeInternetButton() {
+        lifeInternetButton.click();
         switchTo().window(1);
     }
 
@@ -598,4 +608,5 @@ public class MainPage {
         lastArticlesSection.scrollTo();
         return this;
     }
+
 }

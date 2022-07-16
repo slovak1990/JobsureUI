@@ -7,11 +7,11 @@ import org.openqa.selenium.support.How;
 import static com.codeborne.selenide.Selenide.page;
 import static com.codeborne.selenide.Selenide.switchTo;
 
-public class PrivacyPolicy {
+public class PricesPage {
 
-    public static final String PRIVACY_POLICY_PAGE_URL = "https://jobsure.ru/privacy-policy";
+    public static final String PRICES_PAGE_URL = "https://jobsure.ru/prices";
 
-                                                // локаторы
+                                        // локаторы
     //  логотип сайта верхний
     @FindBy(how = How.XPATH, using = "//*[@class='logo']")
     private SelenideElement logoUpperImage;
@@ -92,13 +92,17 @@ public class PrivacyPolicy {
     @FindBy(how = How.XPATH, using = "//*[@class='sendButton_fe98']")
     private SelenideElement sendMessageInWindowButton;
 
-    // картинка на странице Политика конфедициальности (девушка)
-    @FindBy(how = How.XPATH, using = "//*[@data-bgimage='url(images/background/bg-subheader-3.jpg) top']")
-    private SelenideElement privacyPolicyImage;
+    // кнопка выбора Помошь с резюме
+    @FindBy(how = How.XPATH, using = "//*[@id='content']/section[2]/div/div/div/ul/li[1]/div/a[2]")
+    private SelenideElement helpWithResumeButton;
 
-    // текст Общие положения
-    @FindBy(how = How.XPATH, using = "//*[contains (text(), '1. Общие положения ')]")
-    private SelenideElement generalProvisionsText;
+    // кнопка выбора Техническое интервью
+    @FindBy(how = How.XPATH, using = "//*[@id='content']/section[2]/div/div/div/ul/li[2]/div/a[2]")
+    private SelenideElement techInterviewButton;
+
+    // кнопка выбора Помошь с резюме + Техническое интервью
+    @FindBy(how = How.XPATH, using = "//*[@id='content']/section[2]/div/div/div/ul/li[3]/div/a[2]")
+    private SelenideElement comboButton;
 
     // поле ввода Email в нижней части меню
     @FindBy(how = How.XPATH, using = "//*[@id='email']")
@@ -108,11 +112,24 @@ public class PrivacyPolicy {
     @FindBy(how = How.XPATH, using = "//*[@class='inputField_a573']")
     private SelenideElement sendMessageWindowField;
 
-    // раздел олитика в отношении обработки персональных данных
-    @FindBy(how = How.XPATH, using = "//*[@class='mt30 wow fadeInUp animated animated']")
-    private SelenideElement privacyPolicySection;
+    // картинка в разделе Цены (чашка кофе и блокнот)
+    @FindBy(how = How.XPATH, using = "//*[@id='section-home']")
+    private SelenideElement pricesImage;
 
-                                                // методы
+    // картинка Помощь с резюме (блокнот)
+    @FindBy(how = How.XPATH, using = "//*[@id='content']/section[2]/div/div/div/ul/li[1]/div/div[1]/a/img[2]")
+    private SelenideElement helpWithResumeImage;
+
+    // картинка Техническое интервью (мужчина с ноутбуком)
+    @FindBy(how = How.XPATH, using = "//*[@id='content']/section[2]/div/div/div/ul/li[2]/div/div[1]/a/img[2]")
+    private SelenideElement techInterviewImage;
+
+    // картинка Помощь с резюме + Техническое интервью (группа людей)
+    @FindBy(how = How.XPATH, using = "//*[@id='content']/section[2]/div/div/div/ul/li[3]/div/div[1]/a/img[2]")
+    private SelenideElement comboHelpImage;
+
+
+                                                  // методы
     @Step("Click header logo image")
     public MainPage clickLogoUpperImage() {
         logoUpperImage.click();
@@ -173,7 +190,7 @@ public class PrivacyPolicy {
     @Step("Click upper prices button")
     public PricesPage clickPricesUpperButton() {
         pricesUpperButton.click();
-        return page(PricesPage.class);
+        return this;
     }
 
     @Step("Click faq button")
@@ -197,7 +214,7 @@ public class PrivacyPolicy {
     @Step("Click lower prices button")
     public PricesPage clickPricesLowerButton() {
         pricesLowerButton.click();
-        return page(PricesPage.class);
+        return this;
     }
 
     @Step("Click contacts button")
@@ -206,56 +223,80 @@ public class PrivacyPolicy {
         return page(ContactsPage.class);
     }
 
-    @Step("Header image (women) is displayed")
-    public boolean isDisplayedPrivacyPolicyImage() {
-        return privacyPolicyImage.isDisplayed();
-    }
-
-    @Step("General provisions text is displayed")
-    public boolean isDisplayedGeneralProvisionsText() {
-        return generalProvisionsText.isDisplayed();
-    }
-
-    @Step("Section privacy policy section is displayed")
-    public boolean isDisplayedPrivacyPolicySection() {
-        return privacyPolicySection.isDisplayed();
-    }
-
     @Step("Scroll and set value in footer email field")
-    public PrivacyPolicy setFooterEmailField(String email) {
+    public PricesPage setFooterEmailField(String email) {
         footerEmailField.scrollTo();
         footerEmailField.setValue(email);
         return this;
     }
 
     @Step("Click confirm send mailing button")
-    public PrivacyPolicy clickConfirmSendMailingButton() {
+    public PricesPage clickConfirmSendMailingButton() {
         confirmSendMailingButton.click();
         return this;
     }
 
     @Step("Scroll to footer and click scroll up button")
-    public PrivacyPolicy clickScrollUpButton() {
+    public PricesPage clickScrollUpButton() {
         footerEmailField.scrollTo();
         scrollUpButton.click();
         return this;
     }
 
     @Step("Set value in send message window field")
-    public PrivacyPolicy setSendMessageWindowField(String message) {
+    public PricesPage setSendMessageWindowField(String message) {
         sendMessageWindowField.setValue(message);
         return this;
     }
 
     @Step("Click send message window")
-    public PrivacyPolicy clickSendMessageWindow() {
+    public PricesPage clickSendMessageWindow() {
         sendMessageWindow.click();
         return this;
     }
 
     @Step("Click close send message window")
-    public PrivacyPolicy clickCloseSendMessageWindow() {
+    public PricesPage clickCloseSendMessageWindow() {
         closeSendMessageWindow.click();
         return this;
     }
+
+    @Step("Header image (cofe and bloknot) is displayed")
+    public boolean isDisplayedPricesImage() {
+        return pricesImage.isDisplayed();
+    }
+
+    @Step("Help with resume image is displayed")
+    public boolean isDisplayedHelpWithResumeImage() {
+        return helpWithResumeImage.isDisplayed();
+    }
+
+    @Step("Tech interview image is displayed")
+    public boolean isDisplayedTechInterviewImage() {
+        return techInterviewImage.isDisplayed();
+    }
+
+    @Step("Help with resume + tech interview image is displayed")
+    public boolean isDisplayedComboHelpImage() {
+        return comboHelpImage.isDisplayed();
+    }
+
+    @Step("Click help with resume button")
+    public ReservationPage clickHelpWithResumeButton() {
+        helpWithResumeButton.click();
+        return page(ReservationPage.class);
+    }
+
+    @Step("Click tech interview button")
+    public ReservationPage clickTechInterviewButton() {
+        techInterviewButton.click();
+        return page(ReservationPage.class);
+    }
+
+    @Step("Click help with resume + tech interview button")
+    public ReservationPage clickComboButton() {
+        comboButton.click();
+        return page(ReservationPage.class);
+    }
+
 }
