@@ -291,9 +291,9 @@ public class FaqPage {
     }
 
     @Step("Click lower prices button")
-    public FaqPage clickPricesLowerButton() {
+    public PricesPage clickPricesLowerButton() {
         pricesLowerButton.click();
-        return this;
+        return page(PricesPage.class);
     }
 
     @Step("Click contacts button")
