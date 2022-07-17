@@ -593,6 +593,12 @@ public class MainPage {
         return this;
     }
 
+    @Step("Scroll to last articles section")
+    public MainPage scrollToLastArticlesSection() {
+        lastArticlesSection.scrollTo();
+        return this;
+    }
+
     @Step("Get first element from reviews collection")
     private SelenideElement oneElementFromReviews() {
         return reviews.first();
@@ -601,12 +607,6 @@ public class MainPage {
     @Step("One review is displayed")
     public boolean isDisplayedOneElementFromReviews() {
         return oneElementFromReviews().isDisplayed();
-    }
-
-    @Step("Scroll to last articles section")
-    public MainPage scrollToLastArticlesSection() {
-        lastArticlesSection.scrollTo();
-        return this;
     }
 
 }
